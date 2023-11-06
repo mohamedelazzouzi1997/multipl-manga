@@ -1,22 +1,36 @@
 <div class="md:flex flex-col md:flex-row md:min-h-screen w-full  ">
-  <div @click.away="open = false" class="flex flex-col shadow-xl w-full md:w-64 text-gray-300 bg-slate-900 dark-mode:text-gray-300 dark-mode:bg-gray-300 flex-shrink-0" x-data="{ open: false }">
-    <div class="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between">
-      <a href="#" class="text-lg font-semibold tracking-widest text-gray-300 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">Flowtrail UI</a>
-      <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
-        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-          <path x-show="!open" fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-          <path x-show="open" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-        </svg>
-      </button>
-    </div>
+    <div @click.away="open = false"
+        class="flex flex-col shadow-xl w-full md:w-64 text-gray-300 bg-slate-900 dark-mode:text-gray-300 dark-mode:bg-gray-300 flex-shrink-0"
+        x-data="{ open: false }">
+        <div class="flex-shrink-0 px-8 py-4 flex flex-row items-center justify-between">
+            <a href="#"
+                class="text-lg font-semibold tracking-widest text-gray-300 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">
+                DASHBOARD</a>
+            <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
+                <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+                    <path x-show="!open" fill-rule="evenodd"
+                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                        clip-rule="evenodd"></path>
+                    <path x-show="open" fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
 
-    <nav :class="{'block': open, 'hidden': !open}" class="flex-grow md:block px-4 pb-4 md:pb-0 md:overflow-y-auto">
-      <a href="{{ route('dashboard') }}" class=" @if (request()->routeIs('dashboard')) bg-gray-300 text-gray-900 @else text-gray-300 @endif block px-4 py-2 mt-2 text-sm font-semibold  rounded-lg dark-mode:bg-gray-300 dark-mode:hover:bg-gray-300 dark-mode:focus:bg-gray-300 dark-mode:focus:text-white dark-mode:hover:text-white900rk-mode:text-gray-300 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:shadow-outline">Manga</a>
-      <a href="{{ route('category.index') }}" class=" @if (request()->routeIs('category.index')) bg-gray-300 text-gray-900 @else text-gray-300 @endif block px-4 py-2 mt-2 text-sm font-semibold  rounded-lg dark-mode:bg-gray-300 dark-mode:hover:bg-gray-300 dark-mode:focus:bg-gray-300 dark-mode:focus:text-white dark-mode:hover:text-white900rk-mode:text-gray-300 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:shadow-outline">Categories</a>
-      <a href="{{ route('chapter.index') }}" class=" @if (request()->routeIs('chapter.index')) bg-gray-300 text-gray-900 @else text-gray-300 @endif block px-4 py-2 mt-2 text-sm font-semibold  rounded-lg dark-mode:bg-gray-300 dark-mode:hover:bg-gray-300 dark-mode:focus:bg-gray-300 dark-mode:focus:text-white dark-mode:hover:text-white900rk-mode:text-gray-300 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:shadow-outline">Manga chapters</a>
-      {{-- <a href="{{ route('profile.show') }}" class=" @if (request()->routeIs('profile.show')) bg-gray-300 text-gray-900 @else text-gray-300 @endif block px-4 py-2 mt-2 text-sm font-semibold  rounded-lg dark-mode:bg-gray-300 dark-mode:hover:bg-gray-300 dark-mode:focus:bg-gray-300 dark-mode:focus:text-white dark-mode:hover:text-white900rk-mode:text-gray-300 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:shadow-outline">Profile</a> --}}
-      <a href="{{ route('logout') }}" class=" @if (request()->routeIs('logout')) bg-gray-300 text-gray-900 @else text-gray-300 @endif block px-4 py-2 mt-2 text-sm font-semibold  rounded-lg dark-mode:bg-gray-300 dark-mode:hover:bg-gray-300 dark-mode:focus:bg-gray-300 dark-mode:focus:text-white dark-mode:hover:text-white900rk-mode:text-gray-300 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:shadow-outline">Logout</a>
-      {{-- <div @click.away="open = false" class="relative" x-data="{ open: false }">
+        <nav :class="{ 'block': open, 'hidden': !open }"
+            class="flex-grow md:block px-4 pb-4 md:pb-0 md:overflow-y-auto">
+            <a href="{{ route('dashboard') }}"
+                class=" @if (request()->routeIs('dashboard')) bg-gray-300 text-gray-900 @else text-gray-300 @endif block px-4 py-2 mt-2 text-sm font-semibold  rounded-lg dark-mode:bg-gray-300 dark-mode:hover:bg-gray-300 dark-mode:focus:bg-gray-300 dark-mode:focus:text-white dark-mode:hover:text-white900rk-mode:text-gray-300 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:shadow-outline">Manga</a>
+            <a href="{{ route('category.index') }}"
+                class=" @if (request()->routeIs('category.index')) bg-gray-300 text-gray-900 @else text-gray-300 @endif block px-4 py-2 mt-2 text-sm font-semibold  rounded-lg dark-mode:bg-gray-300 dark-mode:hover:bg-gray-300 dark-mode:focus:bg-gray-300 dark-mode:focus:text-white dark-mode:hover:text-white900rk-mode:text-gray-300 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:shadow-outline">Categories</a>
+            <a href="{{ route('chapter.index') }}"
+                class=" @if (request()->routeIs('chapter.index')) bg-gray-300 text-gray-900 @else text-gray-300 @endif block px-4 py-2 mt-2 text-sm font-semibold  rounded-lg dark-mode:bg-gray-300 dark-mode:hover:bg-gray-300 dark-mode:focus:bg-gray-300 dark-mode:focus:text-white dark-mode:hover:text-white900rk-mode:text-gray-300 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:shadow-outline">Manga
+                chapters</a>
+            {{-- <a href="{{ route('profile.show') }}" class=" @if (request()->routeIs('profile.show')) bg-gray-300 text-gray-900 @else text-gray-300 @endif block px-4 py-2 mt-2 text-sm font-semibold  rounded-lg dark-mode:bg-gray-300 dark-mode:hover:bg-gray-300 dark-mode:focus:bg-gray-300 dark-mode:focus:text-white dark-mode:hover:text-white900rk-mode:text-gray-300 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:shadow-outline">Profile</a> --}}
+            <a href="{{ route('logout') }}"
+                class=" @if (request()->routeIs('logout')) bg-gray-300 text-gray-900 @else text-gray-300 @endif block px-4 py-2 mt-2 text-sm font-semibold  rounded-lg dark-mode:bg-gray-300 dark-mode:hover:bg-gray-300 dark-mode:focus:bg-gray-300 dark-mode:focus:text-white dark-mode:hover:text-white900rk-mode:text-gray-300 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:shadow-outline">Logout</a>
+            {{-- <div @click.away="open = false" class="relative" x-data="{ open: false }">
         <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white900rk-mode:focus:bg-gray-300 dark-mode:hover:bg-gray-300 md:block hover:text-gray-900 focus:text-gray-300 hover:bg-gray-300 focus:bg-gray-300 focus:outline-none focus:shadow-outline">
           <span>Dropdown</span>
           <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
@@ -29,9 +43,9 @@
           </div>
         </div>
       </div> --}}
-    </nav>
-  </div>
-  <div class=" w-full  px-5 sm:px-20 mt-10 mx-auto">
-      @yield('content')
-  </div>
+        </nav>
+    </div>
+    <div class=" w-full  px-5 sm:px-20 mt-10 mx-auto">
+        @yield('content')
+    </div>
 </div>

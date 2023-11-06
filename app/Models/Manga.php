@@ -23,6 +23,6 @@ class Manga extends Model
     ];
 
     protected $casts = [
-        'category_id' => 'array'
+        // 'category_id' => 'array'
     ];
 }

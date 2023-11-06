@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('cover');
             $table->string('description');
-            $table->string('category_id');
+            $table->json('category_id');
             $table->string('rate');
             $table->string('author');
             $table->string('artist');

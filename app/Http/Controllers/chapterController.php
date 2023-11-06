@@ -47,7 +47,7 @@ class chapterController extends Controller
             'title' => 'required',
             'manga_id' => 'required',
             'images' => 'required',
-            'images.*' => 'image|mimes:png,jpg,jpeg,webp|max:2048',
+            'images.*' => 'image|mimes:png,jpg,jpeg,webp',
         ]);
 
         $manga_name = Manga::where('id',$request->manga_id)->first()->name;
@@ -87,14 +87,14 @@ class chapterController extends Controller
             'name' => 'required',
             'title' => 'required',
             'manga_id' => 'required',
-            'images' => 'required',
-            'images.*' => 'image|mimes:png,jpg,jpeg,webp|max:2048',
+            // 'images' => 'required',
+            // 'images.*' => 'image|mimes:png,jpg,jpeg,webp|max:2048',
         ]);
         $chapter = Chapter::where('id',$id)->first();
         $manga = Manga::where('id',$request->manga_id)->first();
         $chapter_name = Str::slug($request->name, '-');
 
-        if($request->hasFile('images'))
+        if($request->hasFile('images') && $request->images != null)
         {
             $old_chapter_name = Str::slug($chapter->name, '-');
             File::deleteDirectory(public_path('mangas/'.$manga->name.'/'.$old_chapter_name));
@@ -114,8 +114,8 @@ class chapterController extends Controller
                 'slug' => Str::slug($request->name, '-'),
                 'title' => $request->title,
                 'manga_id' => $request->manga_id,
-                'img' => $names,
             ]);
+
             if($chapter){
                 session()->flash('status','chapter updated');
                 return redirect()->route('chapter.detail',$manga->slug);

@@ -3,6 +3,7 @@
 use App\Models\Manga;
 use App\Models\Chapter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\mangaController;
 use App\Http\Controllers\clientController;
@@ -21,16 +22,19 @@ use App\Http\Controllers\categoryController;
 |
 */
 
-Route::get('/', function () {
-    $manga = Manga::first();
-    $chapters = Chapter::where('manga_id',$manga->id)->get();
-    $last_tree_chapters = Chapter::latest()->take(3)->get();
+Route::get('/', function (Request $request) {
+    if($request->has('manga')){
+        $manga = Manga::where('slug',$request->manga)->first();
+    }else{
+        $manga = Manga::first();
+    }
+    $chapters = Chapter::where('manga_id',$manga->id)->latest()->get();
+    $last_tree_chapters = $chapters->take(3);
     return view('welcome',compact('chapters','last_tree_chapters','manga'));
 });
 //search
 Route::get('/manga/search',[searchController::class,'search'])->name('search');
 //manga chapter
-Route::get('/manga/{manga_name}/{slug}',[clientController::class,'show'])->name('client.show');
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified','is_admin'])->group(function () {
     Route::get('/dashboard',[adminController::class,'index'])->name('dashboard');
@@ -61,5 +65,4 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified','i
     Route::put('/chapter/update/{id}',[chapterController::class,'update'])->name('chapter.update');
     Route::get('/chapter/delete/{id}/{manga_id}',[chapterController::class,'delete'])->name('chapter.delete');
 });
-
-
+Route::get('/manga/{manga_name}/{slug}',[clientController::class,'show'])->name('client.show');

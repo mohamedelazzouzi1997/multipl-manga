@@ -29,9 +29,9 @@ class mangaController extends Controller
 
         $validate = $request->validate([
             'name' => 'required',
-            'cover' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'cover' => 'required|image|mimes:png,jpg,jpeg',
             'description' => 'required',
-            'category_id' => 'required',
+            'category_id' => 'required|array',
             'rate' => 'required',
             'author' => 'required',
             'artist' => 'required',
@@ -39,13 +39,14 @@ class mangaController extends Controller
             'state' => 'required',
         ]);
         $imageName = time().'.'.$request->cover->getClientOriginalName();
+        $categories = implode(', ', $request->category_id);
         if($validate){
             $manga =  Manga::create([
                 'name' => $request->name,
                 'slug' => Str::slug($request->name, '-'),
                 'cover' => $imageName,
                 'description' => $request->description,
-                'category_id' => $request->category_id,
+                'category_id' => str_replace(['[', ']', '"'], "", $categories)  ,
                 'rate' => $request->rate,
                 'author' => $request->author,
                 'artist' => $request->artist,
@@ -74,9 +75,9 @@ class mangaController extends Controller
 
         $validate = $request->validate([
             'name' => 'required',
-            'cover' => 'image|mimes:png,jpg,jpeg|max:2048',
+            'cover' => 'image|mimes:png,jpg,jpeg',
             'description' => 'required',
-            'category_id' => 'required',
+            'category_id' =>  'required|array',
             'rate' => 'required',
             'author' => 'required',
             'artist' => 'required',
@@ -87,6 +88,7 @@ class mangaController extends Controller
         if($request->has('cover')){
             $imageName = time().'.'.$request->cover->getClientOriginalName();
         }
+        $categories =  implode(', ', $request->category_id);
         if($validate){
             $manga = Manga::find($id);
             $oldcover = $manga->cover;
@@ -95,7 +97,7 @@ class mangaController extends Controller
                 'slug' => Str::slug($request->name, '-'),
                 'cover' => ($request->has('cover'))? $imageName :  $oldcover ,
                 'description' => $request->description,
-                'category_id' => $request->category_id,
+                'category_id' => str_replace(['[', ']', '"'], "", $categories),
                 'rate' => $request->rate,
                 'author' => $request->author,
                 'artist' => $request->artist,
